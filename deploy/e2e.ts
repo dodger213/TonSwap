@@ -15,9 +15,6 @@ import { JettonMinter } from "../src/jetton-minter";
 import BN from "bn.js";
 import fs from "fs";
 
-import axios from "axios";
-import axiosThrottle from "axios-request-throttle";
-
 import {
   hexToBn,
   initDeployKey,
