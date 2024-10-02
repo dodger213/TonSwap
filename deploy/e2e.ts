@@ -135,6 +135,7 @@ async function deployAmmMinter(client: TonClient, walletContract: WalletContract
       rpcClient: client,
     });
   }
+
   const seqno = await walletContract.getSeqNo();
 
   const transfer = await walletContract.createTransfer({
@@ -154,6 +155,7 @@ async function deployAmmMinter(client: TonClient, walletContract: WalletContract
 
   await client.sendExternalMessage(walletContract, transfer);
   await waitForContractToBeDeployed(client, newContractAddress);
+  
   console.log(`- Deploy transaction sent successfully to -> ${newContractAddress.toFriendly()}`);
 
   // new contracts takes time
