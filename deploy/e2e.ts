@@ -155,7 +155,7 @@ async function deployAmmMinter(client: TonClient, walletContract: WalletContract
 
   await client.sendExternalMessage(walletContract, transfer);
   await waitForContractToBeDeployed(client, newContractAddress);
-  
+
   console.log(`- Deploy transaction sent successfully to -> ${newContractAddress.toFriendly()}`);
 
   // new contracts takes time
@@ -219,6 +219,7 @@ async function swapUsdcToTon(
   tokenToSell: BN
 ) {
   const ammData2 = await ammMinter.getJettonData();
+
   const minTonToReceive = await (
     await ammMinter.getAmountOut(tokenToSell, hexToBn(ammData2.tokenReserves), hexToBn(ammData2.tonReserves))
   ).minAmountOut;
@@ -236,6 +237,7 @@ async function swapUsdcToTon(
     OPS.SWAP_TOKEN,
     new BN(minTonToReceive.toString()) // Min Amount out (TON)
   );
+  
   await sendTransaction(
     client,
     deployWallet,
