@@ -237,7 +237,7 @@ async function swapUsdcToTon(
     OPS.SWAP_TOKEN,
     new BN(minTonToReceive.toString()) // Min Amount out (TON)
   );
-  
+
   await sendTransaction(
     client,
     deployWallet,
@@ -266,6 +266,7 @@ async function swapTonToUsdc(
 `);
   const tonToSend = new BN(tonToSwap.amountIn.toString());
   const swapTonMessage = ammMinter.swapTon(tonToSend, tokenToReceive);
+  
   await sendTransaction(
     client,
     deployWallet,
@@ -298,6 +299,7 @@ async function removeLiquidity(
   const removeLiqMessage = AmmLpWallet.RemoveLiquidityMessage(new BN(lpData.balance.toString()), deployWallet.address);
 
   let messageIsBounceable = true;
+
   await sendTransaction(
     client,
     deployWallet,
@@ -313,14 +315,14 @@ async function removeLiquidity(
   await printBalances(client, ammMinter, deployWallet.address, deployerUSDCAddress);
 }
 
-async function codeUpgrade(ammMinter: AmmMinterRPC, deployWallet: WalletContract, deployerUSDCAddress: Address, privateKey: Buffer) {
-  const ammMinterCodeB64: string = compileFuncToB64(["contracts/amm-minter-upgrade.fc"]);
-  let codeCell = Cell.fromBoc(ammMinterCodeB64);
-  const upgradeMessage = beginCell().storeUint(26, 32).storeUint(1, 64).storeRef(codeCell[0]).endCell();
-  await sendTransaction(client, deployWallet, ammMinter.address, toNano(GAS_FEES.SWAP_FEE), privateKey, upgradeMessage);
-  let age = await client.callGetMethod(ammMinter.address, "how_old", []);
-  console.log(age);
-}
+// async function codeUpgrade(ammMinter: AmmMinterRPC, deployWallet: WalletContract, deployerUSDCAddress: Address, privateKey: Buffer) {
+//   const ammMinterCodeB64: string = compileFuncToB64(["contracts/amm-minter-upgrade.fc"]);
+//   let codeCell = Cell.fromBoc(ammMinterCodeB64);
+//   const upgradeMessage = beginCell().storeUint(26, 32).storeUint(1, 64).storeRef(codeCell[0]).endCell();
+//   await sendTransaction(client, deployWallet, ammMinter.address, toNano(GAS_FEES.SWAP_FEE), privateKey, upgradeMessage);
+//   let age = await client.callGetMethod(ammMinter.address, "how_old", []);
+//   console.log(age);
+// }
 
 async function main() {
   if (fs.existsSync("./build/tmp.fif")) {
