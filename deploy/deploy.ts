@@ -50,7 +50,6 @@ async function deployJettonAmmLiquidity(jettonContentUri: string, ammContentUri:
   printDeployerBalances(client, deployWallet.address, deployerUSDCAddress);
 
   const ammMinter = await deployAmmMinter(client, deployWallet, walletKey.secretKey, ammContentUri);
-
   console.log(`
         Jetton Minter address :${jettonMinter.address.toFriendly()}
         Amm Minter address :${ammMinter.address.toFriendly()}
@@ -58,7 +57,6 @@ async function deployJettonAmmLiquidity(jettonContentUri: string, ammContentUri:
 
   await addLiquidity(client, ammMinter, deployWallet, deployerUSDCAddress as Address, walletKey.secretKey, 1, toNano(10));
   await sleep(BLOCK_TIME * 2);
-
   await printBalances(client, ammMinter, deployWallet.address, deployerUSDCAddress);
 }
 
@@ -79,7 +77,6 @@ async function deployerRemoveLiquidity(jettonContentUri: string, ammContentUri: 
   saveAddress("Deployer", deployWallet.address);
 
   const ammMinter = await deployAmmMinter(client, deployWallet, walletKey.secretKey, ammContentUri);
-
   await removeLiquidity(client, ammMinter, deployWallet, walletKey.secretKey, 64);
 }
 
@@ -88,7 +85,6 @@ async function deployerRemoveLiquidity(jettonContentUri: string, ammContentUri: 
     await deployPool(process.env.POOL_CONTENT_URI || "https://api.jsonbin.io/xxx/62a0436b05f31f68b3b97ac4");
     return;
   }
-
   //  await deployJettonAmmLiquidity(
   //      "https://api.jsonbin.io/b/x628f1df905f31f77b3a7c5d0-usdt",
   //      "https://api.jsonbin.io/b/x628f1df905f31f77b3a7c5d1-usdt"
@@ -101,8 +97,6 @@ async function deployerRemoveLiquidity(jettonContentUri: string, ammContentUri: 
   //     "https://api.jsonbin.io/b/x628f1df905f31f77b3a7c5d1"
   // );
 })();
-
-
 
 // await deployJettonAmmLiquidity(
 //     "https://api.jsonbin.io/b/x628f1df905f31f77b3a7c5d0-shib",
