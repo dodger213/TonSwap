@@ -18,8 +18,8 @@ import {
 } from "./deploy-utils";
 
 const client = new TonClient({
-  // endpoint: "https://sandbox.tonhubapi.com/jsonRPC",
   // endpoint: "https://testnet.tonhubapi.com/jsonRPC",
+  // endpoint: "https://sandbox.tonhubapi.com/jsonRPC",
   endpoint: "https://scalable-api.tonwhales.com/jsonRPC",
   // endpoint: "https://testnet.toncenter.com/api/v2/jsonRPC",
 });
