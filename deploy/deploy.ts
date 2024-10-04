@@ -90,7 +90,9 @@ async function deployerRemoveLiquidity(jettonContentUri: string, ammContentUri: 
   //      "https://api.jsonbin.io/b/x628f1df905f31f77b3a7c5d1-usdt"
   //  );
 
+
   // await mintJettons("https://api.jsonbin.io/b/x628f1df905f31f77b3a7c5d0-shib", 50, Address.parse("EQDjhy1Ig-S0vKCWwd3XZRKODGx0RJyhqW37ZDMl-pgv8iBr"));
+
 
   // await deployerRemoveLiquidity(
   //     "https://api.jsonbin.io/b/x628f1df905f31f77b3a7c5d0",
